@@ -9,13 +9,27 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONArray;
+import org.springframework.stereotype.Service;
 
-public class Main {
-    static ArrayList<String> datas = new ArrayList();
-    static Random rand = new Random(System.currentTimeMillis());
-    static boolean firstPrint = false;
-    static class MyClass {
-        private String parseAddr(String input) {
+@Service
+public class CallSdk {
+        static ArrayList<String> datas = new ArrayList();
+        static {
+                    datas.add("");
+                    datas.add("\n");
+                    datas.add("asdfasdf\0asdfasdf");
+             try (BufferedReader br = new BufferedReader(new FileReader("testdata.txt"))) {
+                                String line;
+                                while ((line = br.readLine()) != null) {
+                                    datas.add(line);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                    }
+                    System.out.printf("testdata.size=%d\n", datas.size());
+        }
+        static boolean firstPrint = false;
+        private String parseAddr1(String input) {
             String result = SdkUtils.transformAddress(input, "ton");
             CommandResponse response = JSONObject.parseObject(result, CommandResponse.class);
             if (!firstPrint) {
@@ -34,40 +48,15 @@ public class Main {
             }
             return "";
         }
-        public void myFunction() {
+
+        public String parseAddr() {
             //System.out.printf("run at %s\n", Thread.currentThread().getName());
+            String ret = "";
             for (int i = 0; i <  datas.size(); i++) {
                 String input = datas.get( i );
-                parseAddr(input);
+                ret = parseAddr1(input);
             }
+            return ret;
             //System.out.printf("end at %s\n", Thread.currentThread().getName());
         }
-    }
-
-    public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new FileReader("testdata.txt"))) {
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        datas.add(line);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-        }
-        datas.add("");
-        datas.add("\n");
-        datas.add("asdfasdf\0asdfasdf");
-        System.out.printf("testdata.size=%d\n", datas.size());
-        ExecutorService executor = Executors.newFixedThreadPool(2000);
-        MyClass myObject = new MyClass();
-        for (int j = 0; j < 2000000; j++) {
-            executor.execute(() -> {
-                myObject.myFunction();
-            } );
-        }
-        try {
-            Thread.sleep(1000 * 1000000);
-        } catch (Exception e) {
-
-        }
-    }
 }

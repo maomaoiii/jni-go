@@ -19,8 +19,8 @@ public class Main {
             String result = SdkUtils.transformAddress(input, "ton");
             CommandResponse response = JSONObject.parseObject(result, CommandResponse.class);
             if (!firstPrint) {
-                            firstPrint = true;
-                            System.out.printf("response=%s result=%s input=%s\n", response, result, input);
+                firstPrint = true;
+                System.out.printf("response=%s result=%s input=%s\n", response, result, input);
             }
             if(response.getCode() != 0 ) {
                  return "";
@@ -36,8 +36,8 @@ public class Main {
         }
         public void myFunction() {
             //System.out.printf("run at %s\n", Thread.currentThread().getName());
-            for (int i = 0; i < 1000; i++) {
-                String input = datas.get( rand.nextInt( datas.size() ) );
+            for (int i = 0; i <  datas.size(); i++) {
+                String input = datas.get( i );
                 parseAddr(input);
             }
             //System.out.printf("end at %s\n", Thread.currentThread().getName());

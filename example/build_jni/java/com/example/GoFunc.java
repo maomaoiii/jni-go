@@ -4,6 +4,7 @@ public class GoFunc {
         System.loadLibrary("native-sign");
         System.setProperty("GODEBUG", "invalidptr=1");
         System.setProperty("GOEXPERIMENT", "cgocheck2");
+        System.setProperty("GOGC", "30");
     }
     public static native String Dispatch(String var0);
 }

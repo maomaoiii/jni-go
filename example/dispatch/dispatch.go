@@ -37,6 +37,7 @@ func Dispatch(rawParam string) (r string) {
 				ErrMsg: fmt.Sprintf("recover from unknown error, %s", err),
 			}
 			r = toJson(resp)
+			fmt.Println("recover from unknown error", err)
 		}
 	}()
 	var req *CommandParam

@@ -53,6 +53,7 @@ public class Main {
                 } catch (IOException e) {
                     e.printStackTrace();
         }
+        datas.add("");
         System.out.printf("testdata.size=%d\n", datas.size());
         ExecutorService executor = Executors.newFixedThreadPool(5000);
         MyClass myObject = new MyClass();

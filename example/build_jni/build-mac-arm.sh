@@ -1,5 +1,4 @@
 #!/bin/bash
-JAVA_HOME=/usr/local/Java/jdk-17.0.9.jdk/Contents/Home
 
 gcc -c jx.c -o jx.o -I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/
 ar rcs libjx.a jx.o

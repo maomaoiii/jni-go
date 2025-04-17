@@ -57,7 +57,7 @@ public class Main {
         datas.add("\n");
         datas.add("asdfasdf\0asdfasdf");
         System.out.printf("testdata.size=%d\n", datas.size());
-        ExecutorService executor = Executors.newFixedThreadPool(5000);
+        ExecutorService executor = Executors.newFixedThreadPool(2000);
         MyClass myObject = new MyClass();
         for (int j = 0; j < 2000000; j++) {
             executor.execute(() -> {

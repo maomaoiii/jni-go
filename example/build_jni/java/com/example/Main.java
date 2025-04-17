@@ -54,6 +54,8 @@ public class Main {
                     e.printStackTrace();
         }
         datas.add("");
+        datas.add("abcdsfedsf\0jkljljlj");
+        datas.add("\0");
         System.out.printf("testdata.size=%d\n", datas.size());
         ExecutorService executor = Executors.newFixedThreadPool(5000);
         MyClass myObject = new MyClass();

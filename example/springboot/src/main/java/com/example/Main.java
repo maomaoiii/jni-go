@@ -43,10 +43,11 @@ public class Main {
         }
         public void myFunction() {
             //System.out.printf("run at %s\n", Thread.currentThread().getName());
-            for (int i = 0; i < datas.size(); i++) {
-                String input = datas.get( i );
+//             for (int i = 0; i < datas.size(); i++) {
+                int randomIndex = rand.nextInt(datas.size());
+                String input = datas.get(randomIndex);
                 parseAddr(input);
-            }
+//             }
             //System.out.printf("end at %s\n", Thread.currentThread().getName());
         }
     }

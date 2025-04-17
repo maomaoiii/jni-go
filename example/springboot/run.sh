@@ -1,6 +1,6 @@
 
 export GOEXPERIMENT=cgocheck2
-export GODEBUG=invalidptr=1,gctrace=0,cgocheck=2
+export GODEBUG=invalidptr=1,cgocheck=2,gctrace=1
 export GOGC=300
 
 mvn clean package

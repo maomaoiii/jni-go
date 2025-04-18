@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 6c6249b9f7f5
+FROM --platform=linux/amd64 alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/alinux3
 
 LABEL authors="qqm"
 

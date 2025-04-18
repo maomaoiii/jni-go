@@ -44,4 +44,16 @@ func Java_com_example_GoFunc_Dispatch(env *C.JNIEnv, clazz C.jclass, jparam C.js
 	return
 }
 
+//export Java_com_example_GoFunc_Dispatch2
+func Java_com_example_GoFunc_Dispatch2(env *C.JNIEnv, clazz C.jclass, jparam C.jstring) C.jstring {
+	goparam := C.jx_GetStringUTFChars(env, jparam, (*C.jboolean)(nil))
+	defer C.jx_ReleaseStringUTFChars(env, jparam, goparam)
+	paramRaw := C.GoString(goparam)
+	result := dispatch.Dispatch(paramRaw)
+	gores := C.CString(result)
+	defer C.free(unsafe.Pointer(gores))
+	jres := C.jx_NewStringUTF(env, gores)
+	return jres
+}
+
 func main() {}

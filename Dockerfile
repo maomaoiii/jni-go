@@ -37,8 +37,7 @@ RUN mvn clean package -DskipTests
 
 #ENV LD_LIBRARY_PATH=/app/java-project/src/main/resources/lib:${LD_LIBRARY_PATH}
 ENV CGO_ENABLED=1
-ENV GODEBUG=invalidptr=1
-ENV GODEBUG=cgocheck=2
+ENV GODEBUG=invalidptr=1,cgocheck=2
 ENV GOGC=30
 
 ENTRYPOINT ["java", "-jar", "/app/jni-go/example/build_jni/target/demo-0.0.1-SNAPSHOT.jar", "-Xms2g", "-Xmx2g", "-Xss256k", "-XX:+UseG1GC", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true"]

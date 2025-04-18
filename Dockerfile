@@ -40,5 +40,5 @@ ENV CGO_ENABLED=1
 ENV GODEBUG=invalidptr=1,cgocheck=2
 ENV GOGC=30
 
-ENTRYPOINT ["java", "-jar", "/app/jni-go/example/build_jni/target/demo-0.0.1-SNAPSHOT.jar", "-Xms2g", "-Xmx2g", "-Xss256k", "-XX:+UseG1GC", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true"]
+ENTRYPOINT ["java", "-jar", "/app/jni-go/example/build_jni/target/demo-0.0.2-SNAPSHOT.jar", "-Xms2g", "-Xmx2g", "-Xss256k", "-XX:+UseG1GC", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true"]
 

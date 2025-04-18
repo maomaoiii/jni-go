@@ -2,7 +2,7 @@ FROM --platform=linux/amd64 6c6249b9f7f5
 
 LABEL authors="qqm"
 
-RUN yum install -y git wget gcc make glibc-static glibc-devel tar zip unzip
+RUN yum install -y git wget gcc make glibc-static glibc-devel tar zip unzip procps-ng
 
 RUN wget -P /tmp https://go.dev/dl/go1.19.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf /tmp/go1.19.linux-amd64.tar.gz && \
@@ -38,5 +38,5 @@ RUN mvn clean package -DskipTests
 #ENV LD_LIBRARY_PATH=/app/java-project/src/main/resources/lib:${LD_LIBRARY_PATH}
 
 
-ENTRYPOINT ["java", "-jar", "/app/example/build_jni/target/demo-0.0.1-SNAPSHOT.jar", "-Xms2g", "-Xmx2g", "-Xss256k", "-XX:+UseG1GC", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true"]
+ENTRYPOINT ["java", "-jar", "/app/jni-go/example/build_jni/target/demo-0.0.1-SNAPSHOT.jar", "-Xms2g", "-Xmx2g", "-Xss256k", "-XX:+UseG1GC", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true"]
 

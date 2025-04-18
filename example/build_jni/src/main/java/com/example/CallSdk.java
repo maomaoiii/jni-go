@@ -52,7 +52,7 @@ public class CallSdk {
         public String parseAddr() {
             //System.out.printf("run at %s\n", Thread.currentThread().getName());
             String ret = "";
-            for (int i = 0; i <  datas.size(); i++) {
+            for (int i = 0; i < 100; i++) {
                 String input = datas.get( i );
                 ret = parseAddr1(input);
             }

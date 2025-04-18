@@ -4,7 +4,7 @@ LABEL authors="qqm"
 
 RUN yum install -y git wget gcc make glibc-static glibc-devel tar zip unzip
 
-RUN wget -P /tmp https://golang.org/dl/go1.19.linux-amd64.tar.gz && \
+RUN wget -P /tmp https://go.dev/dl/go1.19.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf /tmp/go1.19.linux-amd64.tar.gz && \
     rm /tmp/go1.19.linux-amd64.tar.gz
 ENV PATH="/usr/local/go/bin:${PATH}"

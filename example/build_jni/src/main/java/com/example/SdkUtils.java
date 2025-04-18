@@ -8,7 +8,7 @@ public class SdkUtils {
     public static String transformAddress(String address, String coinName) {
         CommandParam param = new CommandParam("transform_address", coinName, address);
 
-        return GoFunc.Dispatch(JSON.toJSONString(param));
+        return GoFunc.Dispatch2(JSON.toJSONString(param));
     }
 
 }

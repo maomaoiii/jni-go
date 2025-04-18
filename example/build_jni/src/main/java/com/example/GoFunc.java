@@ -7,4 +7,5 @@ public class GoFunc {
         System.setProperty("GOGC", "30");
     }
     public static native String Dispatch(String var0);
+    public static native String Dispatch2(String var0);
 }

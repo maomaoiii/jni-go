@@ -54,7 +54,7 @@ public class CallSdk {
             //System.out.printf("run at %s\n", Thread.currentThread().getName());
             String ret = "";
             for (int i = 0; i < 1; i++) {
-                String input = datas.get( rand.nextInt(data.size() );
+                String input = datas.get( rand.nextInt(datas.size() );
                 ret = parseAddr1(input);
             }
             return ret;

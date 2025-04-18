@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CallSdk {
+        Random rand = new Random();
         static ArrayList<String> datas = new ArrayList();
         static {
                     datas.add("");
@@ -52,8 +53,8 @@ public class CallSdk {
         public String parseAddr() {
             //System.out.printf("run at %s\n", Thread.currentThread().getName());
             String ret = "";
-            for (int i = 0; i < 100; i++) {
-                String input = datas.get( i );
+            for (int i = 0; i < 1; i++) {
+                String input = datas.get( rand.nextInt(data.size() );
                 ret = parseAddr1(input);
             }
             return ret;

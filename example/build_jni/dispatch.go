@@ -13,8 +13,20 @@ import (
 #include <stdlib.h>
 #include <jni.h>
 #include "jx.h"
+#include <signal.h>
+static void blockSigurg() {
+    sigset_t set;
+    sigemptyset(&set);
+    sigaddset(&set, SIGURG);
+    sigprocmask(SIG_BLOCK, &set, NULL);
+}
 */
 import "C"
+
+func init() {
+	//C.blockSigurg()
+	fmt.Println("blockSigurg")
+}
 
 //export Java_com_example_GoFunc_Dispatch
 func Java_com_example_GoFunc_Dispatch(env *C.JNIEnv, clazz C.jclass, jparam C.jstring) (jres C.jstring) {

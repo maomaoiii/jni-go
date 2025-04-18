@@ -32,7 +32,7 @@ RUN git clone https://github.com/maomaoiii/jni-go.git
 WORKDIR /app/jni-go/example/build_jni/
 RUN bash build-so.sh
 
-WORKDIR /app/example/build_jni/
+WORKDIR /app/jni-go/example/build_jni/
 RUN mvn clean package -DskipTests
 
 #ENV LD_LIBRARY_PATH=/app/java-project/src/main/resources/lib:${LD_LIBRARY_PATH}

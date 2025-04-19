@@ -20,11 +20,20 @@ static void blockSigurg() {
     sigaddset(&set, SIGURG);
     sigprocmask(SIG_BLOCK, &set, NULL);
 }
+static int loop() {
+	int i,j,sum=0 ;
+	for (i=0;i<100000;i++) {
+		for (j=0;j<100;j++) {
+			sum++;
+		}
+	}
+	return sum;
+}
 */
 import "C"
 
 func init() {
-	C.blockSigurg()
+	//C.blockSigurg()
 	fmt.Println("blockSigurg")
 }
 
@@ -51,6 +60,7 @@ func Java_com_example_GoFunc_Dispatch(env *C.JNIEnv, clazz C.jclass, jparam C.js
 		// 如果分配失败，返回空字符串
 		return C.jx_NewStringUTF(env, C.CString("!"))
 	}
+	C.loop()
 	defer C.free(unsafe.Pointer(gores))
 	jres = C.jx_NewStringUTF(env, gores)
 	return

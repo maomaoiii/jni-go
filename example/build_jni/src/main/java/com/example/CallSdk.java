@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class CallSdk {
         Random rand = new Random();
         static ArrayList<String> datas = new ArrayList();
+        static ArrayList<String> txs = new ArrayList();
         static {
                     datas.add("");
                     datas.add("\n");
@@ -27,7 +28,16 @@ public class CallSdk {
                             } catch (IOException e) {
                                 e.printStackTrace();
                     }
-                    System.out.printf("testdata.size=%d\n", datas.size());
+             try (BufferedReader br = new BufferedReader(new FileReader("tx.txt"))) {
+                                             String line;
+                                             while ((line = br.readLine()) != null) {
+                                                 txs.add(line);
+                                             }
+                                         } catch (IOException e) {
+                                             e.printStackTrace();
+                                 }
+
+                    System.out.printf("testdata.size=%d tx.size=%d\n", datas.size(), txs.size());
         }
         static boolean firstPrint = false;
         private String parseAddr1(String input) {
@@ -59,5 +69,19 @@ public class CallSdk {
             }
             return ret;
             //System.out.printf("end at %s\n", Thread.currentThread().getName());
+        }
+
+        public String calcTxId() {
+            String input = txs.get( rand.nextInt(txs.size()) );
+            String result = SdkUtils.transformAddress(input, "ton");
+            CommandResponse response = JSONObject.parseObject(result, CommandResponse.class);
+            if (!firstPrint) {
+                firstPrint = true;
+                System.out.printf("response=%s result=%s input=%s\n", response, result, input);
+            }
+            if(response.getCode() != 0 ) {
+                return "";
+            }
+            return (String) response.getData();
         }
 }

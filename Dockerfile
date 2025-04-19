@@ -24,18 +24,16 @@ RUN wget -P /tmp https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-ma
 ENV MAVEN_HOME=/opt/maven
 ENV PATH="${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}"
 
+ARG CACHE_BUSTER
 WORKDIR /app
 #COPY  jni-go.tgz /app
 #RUN tar -zxvf jni-go.tgz
-ARG CACHE_BUSTER
 RUN git clone https://github.com/maomaoiii/jni-go.git
 
 WORKDIR /app/jni-go/example/build_jni/
-ARG CACHE_BUSTER
 RUN bash build-so.sh
 
 WORKDIR /app/jni-go/example/build_jni/
-ARG CACHE_BUSTER
 RUN mvn clean package -DskipTests
 
 #ENV LD_LIBRARY_PATH=/app/java-project/src/main/resources/lib:${LD_LIBRARY_PATH}

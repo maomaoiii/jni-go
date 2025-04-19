@@ -23,8 +23,8 @@ public class DemoApplication {
         for (int i =0; i < 100; i++) {
             ret = callSdk.parseAddr();
         }
-        CommandResponse resp = new CommandResponse()
-        resp.setData(ret)
+        CommandResponse resp = new CommandResponse();
+        resp.setData(ret);
         return JSON.toJSONString(resp);
     }
 }

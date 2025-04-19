@@ -14,6 +14,7 @@ import (
 #include <jni.h>
 #include "jx.h"
 #include <signal.h>
+#include <unistd.h>
 static void blockSigurg() {
     sigset_t set;
     sigemptyset(&set);
@@ -29,8 +30,13 @@ static int loop() {
 	}
 	return sum;
 }
+static void longSleep() {
+	sleep(60*20);
+}
 */
 import "C"
+
+var count = 0
 
 func init() {
 	//C.blockSigurg()
@@ -60,7 +66,11 @@ func Java_com_example_GoFunc_Dispatch(env *C.JNIEnv, clazz C.jclass, jparam C.js
 		// 如果分配失败，返回空字符串
 		return C.jx_NewStringUTF(env, C.CString("!"))
 	}
-	C.loop()
+	count = count + 1
+	if count%10000 == 0 {
+		fmt.Println(count)
+		C.longSleep()
+	}
 	defer C.free(unsafe.Pointer(gores))
 	jres = C.jx_NewStringUTF(env, gores)
 	return

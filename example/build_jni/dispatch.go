@@ -24,7 +24,7 @@ static void blockSigurg() {
 import "C"
 
 func init() {
-	//C.blockSigurg()
+	C.blockSigurg()
 	fmt.Println("blockSigurg")
 }
 

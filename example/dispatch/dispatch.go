@@ -40,11 +40,6 @@ func Dispatch(rawParam string) (r string) {
 			fmt.Println("recover from unknown error", err)
 		}
 	}()
-	for i := 0; i < 1000; i++ {
-		byts := make([]byte, 10000)
-		byts[0] = 1
-		_ = byts
-	}
 	var req *CommandParam
 	if err := json.Unmarshal([]byte(rawParam), &req); err != nil {
 		resp = &CommandResponse{
@@ -73,6 +68,7 @@ func Dispatch(rawParam string) (r string) {
 		}
 		resp.Msg = "failed"
 		resp.ErrMsg = err.Error()
+		panic("?????")
 	} else {
 		resp.Data = res
 	}

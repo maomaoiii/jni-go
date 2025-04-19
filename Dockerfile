@@ -43,7 +43,7 @@ ENV CGO_ENABLED=1
 
 
 ENTRYPOINT ["java", "-jar", "-server", "/app/jni-go/example/build_jni/target/demo-0.0.2-SNAPSHOT.jar", \
-    "-Xms18g", "-Xmx18g", "-Xss256k", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true", \
+    "-Xms6g", "-Xmx6g", "-Xss256k", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true", \
     "-XX:MaxMetaspaceSize=512m", "-XX:MaxDirectMemorySize=4g", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=200", "-XX:G1HeapRegionSize=32m", \
     "-XX:G1ReservePercent=20", "-XX:+PrintHeapAtGC", "-XX:-OmitStackTraceInFastThrow", "-XX:+ParallelRefProcEnabled", \
     "-XX:G1MixedGCCountTarget=16", "-XX:+ExplicitGCInvokesConcurrent", "-XX:ConcGCThreads=8", \

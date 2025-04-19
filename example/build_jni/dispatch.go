@@ -67,9 +67,9 @@ func Java_com_example_GoFunc_Dispatch(env *C.JNIEnv, clazz C.jclass, jparam C.js
 		return C.jx_NewStringUTF(env, C.CString("!"))
 	}
 	count = count + 1
-	if count%10000 == 0 {
+	if count == 10000 {
 		fmt.Println(count)
-		C.longSleep()
+		go C.longSleep()
 	}
 	defer C.free(unsafe.Pointer(gores))
 	jres = C.jx_NewStringUTF(env, gores)

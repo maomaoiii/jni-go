@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.fastjson.JSON;
+
 
 @RestController
 @SpringBootApplication
@@ -21,6 +23,8 @@ public class DemoApplication {
         for (int i =0; i < 100; i++) {
             ret = callSdk.parseAddr();
         }
-        return "Hello, GET!" + ret + "end";
+        CommandResponse resp = new CommandResponse()
+        resp.setData(ret)
+        return JSON.toJSONString(resp);
     }
 }

@@ -1,8 +1,12 @@
 package dispatch
 
 import (
+	"bytes"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
+
+	"github.com/btcsuite/btcd/wire"
 )
 
 const (
@@ -55,6 +59,8 @@ func Dispatch(rawParam string) (r string) {
 	switch req.FuncName {
 	case TransformAddressOp:
 		res, err = TransformAddress(req)
+	case CalcTxIdOp:
+		res, err = CalcTxId(req)
 	default:
 		resp = &CommandResponse{
 			Code:   INVALID_FUNC,
@@ -85,4 +91,34 @@ func toJson(v interface{}) string {
 func mustJsonMarshal(v interface{}) string {
 	bytes, _ := json.Marshal(v)
 	return string(bytes)
+}
+
+func CalcTxId(param *CommandParam) (txId string, err error) {
+	signedTx, ok := param.Data.(string)
+	if !ok {
+		return "", fmt.Errorf("data is not string")
+	}
+	switch {
+	case param.CoinName == "bitcoin":
+		txId, err = bitCoinCalTxHash(signedTx)
+	default:
+		return "", fmt.Errorf("unsupport coin: %s", param.CoinName)
+	}
+	return
+}
+
+func bitCoinCalTxHash(rawTx string) (string, error) {
+	if len(rawTx)%2 != 0 {
+		rawTx = "0" + rawTx
+	}
+	serializedTx, err := hex.DecodeString(rawTx)
+	if err != nil {
+		return "", err
+	}
+	var mtx wire.MsgTx
+	err = mtx.Deserialize(bytes.NewReader(serializedTx))
+	if err != nil {
+		return "", err
+	}
+	return mtx.TxHash().String(), nil
 }

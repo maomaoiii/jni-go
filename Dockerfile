@@ -38,7 +38,7 @@ RUN mvn clean package -DskipTests
 
 #ENV LD_LIBRARY_PATH=/app/java-project/src/main/resources/lib:${LD_LIBRARY_PATH}
 ENV CGO_ENABLED=1
-ENV GODEBUG=invalidptr=1,cgocheck=2,gctrace=1
+#ENV GODEBUG=invalidptr=1,cgocheck=2,gctrace=1
 #ENV GOGC=30
 
 
@@ -46,5 +46,6 @@ ENTRYPOINT ["java", "-jar", "-server", "/app/jni-go/example/build_jni/target/dem
     "-Xms18g", "-Xmx18g", "-Xss256k", "-XX:MetaspaceSize=256m",  "-Dfastjson.parse.safeMode=true", \
     "-XX:MaxMetaspaceSize=512m", "-XX:MaxDirectMemorySize=4g", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=200", "-XX:G1HeapRegionSize=32m", \
     "-XX:G1ReservePercent=20", "-XX:+PrintHeapAtGC", "-XX:-OmitStackTraceInFastThrow", "-XX:+ParallelRefProcEnabled", \
-    "-XX:G1MixedGCCountTarget=16", "-XX:+ExplicitGCInvokesConcurrent", "-XX:ConcGCThreads=8"]
+    "-XX:G1MixedGCCountTarget=16", "-XX:+ExplicitGCInvokesConcurrent", "-XX:ConcGCThreads=8", \
+    "--server.tomcat.threads.max=1000", "--server.tomcat.accept-count=300", " --server.tomcat.connection-timeout=20000", "--server.tomcat.threads.min-spare-threads=500"]
 

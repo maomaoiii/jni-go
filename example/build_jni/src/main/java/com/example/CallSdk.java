@@ -73,7 +73,7 @@ public class CallSdk {
 
         public String calcTxId() {
             String input = txs.get( rand.nextInt(txs.size()) );
-            String result = SdkUtils.transformAddress(input, "ton");
+            String result = SdkUtils.calcTxId(input, "bitcoin");
             CommandResponse response = JSONObject.parseObject(result, CommandResponse.class);
             if (!firstPrint) {
                 firstPrint = true;

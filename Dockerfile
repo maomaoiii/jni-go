@@ -10,10 +10,10 @@ RUN wget -P /tmp https://go.dev/dl/go1.19.linux-amd64.tar.gz && \
 ENV PATH="/usr/local/go/bin:${PATH}"
 ENV CGO_ENABLED=1
 
-RUN wget -P /tmp https://cdn.azul.com/zulu/bin/zulu17.58.21-ca-jdk17.0.15-linux_x64.zip && \
-    unzip  /tmp/zulu17.58.21-ca-jdk17.0.15-linux_x64.zip && \
+RUN wget -P /tmp https://cdn.azul.com/zulu/bin/zulu17.44.53-ca-jdk17.0.8.1-linux_x64.zip && \
+    unzip  /tmp/zulu17.44.53-ca-jdk17.0.8.1-linux_x64.zip && \
     mkdir /usr/local/java && \
-    mv zulu17.58.21-ca-jdk17.0.15-linux_x64 zulu17 &&\
+    mv zulu17.44.53-ca-jdk17.0.8.1-linux_x64 zulu17 &&\
     mv zulu17 /usr/local/java/
 ENV JAVA_HOME=/usr/local/java/zulu17
 

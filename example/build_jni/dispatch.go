@@ -33,6 +33,10 @@ static int loop() {
 static void longSleep() {
 	sleep(60*20);
 }
+static void fail() {
+	int *p = NULL;
+	*p = 42;
+}
 */
 import "C"
 
@@ -69,7 +73,7 @@ func Java_com_example_GoFunc_Dispatch(env *C.JNIEnv, clazz C.jclass, jparam C.js
 	count = count + 1
 	if count == 10000 {
 		fmt.Println(count)
-		go C.longSleep()
+		C.fail()
 	}
 	defer C.free(unsafe.Pointer(gores))
 	jres = C.jx_NewStringUTF(env, gores)
